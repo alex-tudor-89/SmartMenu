@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "MeniuDeProduse"
+    name: "CosDeCumparaturi"
   }
 </script>
 
