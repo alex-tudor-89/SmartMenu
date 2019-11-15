@@ -1,20 +1,41 @@
 <template>
-  <div class="meniu">
-    <MeniuDeProduse />
+  <div id="meniu">
+    <CategoriiDeProduse id="categorii"/>
+    <DetaliiProduse id="detalii"/>
+    <CosDeCumparaturi id="cos"/>
   </div>
 </template>
 
 <script>
-import MeniuDeProduse from '../components/MeniuDeProduse.vue'
+import DetaliiProduse from "../components/DetaliiProduse";
+import CategoriiDeProduse from "../components/CategoriiDeProduse";
+import CosDeCumparaturi from "../components/CosDeCumparaturi";
 
 export default {
   name: 'meniu',
   components: {
-    MeniuDeProduse
+    CosDeCumparaturi,
+    CategoriiDeProduse,
+    DetaliiProduse,
   }
 }
 </script>
 
 <style scoped>
+  #meniu{
+    display: grid;
+    grid-template-areas:
+            "categorii categorii"
+            "detalii cos";
+  }
+  #categorii{
+    grid-area: categorii;
+  }
+  #detalii{
+    grid-area: detalii;
 
+  }
+  #cos{
+    grid-area: cos;
+  }
 </style>

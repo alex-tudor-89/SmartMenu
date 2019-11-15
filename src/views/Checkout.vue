@@ -1,5 +1,7 @@
 <template>
-  $END$
+  <div id="checkout">
+    <h1>Client ptr checkout</h1>
+  </div>
 </template>
 
 <script>
