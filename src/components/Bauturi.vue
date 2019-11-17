@@ -1,6 +1,6 @@
 <template>
     <div id="bauturi">
-        <div id="container" v-for="bautura in bauturi" :key="bautura.id">
+        <div id="container" v-for="bautura in allDrinks" :key="bautura.id">
             <img :src="bautura.img">
             <h3>{{ bautura.name }}</h3>
             <h4>{{ bautura.price }}</h4>
@@ -9,40 +9,24 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: "Bauturi",
-        data() {
-            return {
-                bauturi: [
-                    {
-                        id: 1,
-                        name: 'Apa minerala / plata',
-                        price: 'xx lei',
-                        img: require('../assets/img/bauturi/Apa minerala sau Apa plata.jpg')
-                    },
-                    {
-                        id: 2,
-                        name: 'Suc - gama pepsi',
-                        price: 'yy lei',
-                        img: require('../assets/img/bauturi/Gama pepsi.jpg')
-                    }
-                ]
-            }
-        }
+        computed:  mapGetters(['allDrinks'])
     }
 </script>
 
 <style scoped>
     #bauturi{
         display: flex;
-        justify-content: space-around;
-        margin-top: 10vh;
+        flex-direction: column;
     }
     #container{
         text-align: center;
     }
     img{
-        width: 20vw;
+        width: 15vw;
         border-radius: 40px;
     }
 </style>

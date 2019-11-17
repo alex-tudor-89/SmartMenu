@@ -25,24 +25,46 @@
     <div id="detalii">
       <router-view></router-view>
     </div>
+    <div id="checkout">
+      <CosDeCumparaturi/>
+    </div>
   </div>
 </template>
 
 <script>
+import CosDeCumparaturi from "../components/CosDeCumparaturi";
+
 export default {
-  name: 'meniu'
+  name: 'meniu',
+    components: {CosDeCumparaturi}
 }
 </script>
 
 <style scoped>
+  #menuView{
+    display: grid;
+    margin-top: 5vh;
+    grid-template-rows: 1fr 3vh;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "meniu meniu"
+        "detalii checkout";
+  }
   #meniu{
+    grid-area: meniu;
     display: flex;
     justify-content: space-around;
-    margin-top: 5vh;
+      margin-bottom: 5vh;
+  }
+  #detalii{
+    grid-area: detalii;
+  }
+  #checkout{
+    grid-area: checkout;
   }
   .menuImg{
     height: 17vh;
-    border-radius: 30px;
+    border-radius: 100%;
   }
   h3{
     text-align: center;
