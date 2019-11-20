@@ -91,9 +91,7 @@ const state = {
             img2: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
-    cumparaturi: {
-        cos: []
-    }
+    cumparaturi: []
 };
 
 const getters = {
@@ -101,14 +99,15 @@ const getters = {
     allCrispys: (state) => state.crispys,
     allSalads: (state) => state.salads,
     allDrinks: (state) => state.drinks,
-    allCombos: (state) => state.combos
+    allCombos: (state) => state.combos,
+    shopping: (state) => state.cumparaturi
 };
 
 const actions = {};
 
 const mutations = {
-    add(cumparaturi, data){
-        cumparaturi.cos = data;
+    add(state, data){
+        state.cumparaturi = data;
     }
 };
 

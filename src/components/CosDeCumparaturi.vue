@@ -1,15 +1,19 @@
 <template>
     <div id="cos">
         <h1>Cos de cumparaturi</h1>
-        <img src="../assets/logo.png" alt=""><br>
+        <span v-for="item in shopping" :key="item.index">
+            {{ item }}
+        </span><br><br>
         <button>CANCEL</button>
         <button>BUY</button>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
-        name: "CosDeCumparaturi"
+        name: "CosDeCumparaturi",
+        computed: mapGetters(['shopping'])
     }
 </script>
 
