@@ -1,30 +1,42 @@
 <template>
-    <div id="combo">
-        <div id="container" v-for="combo in allCombos" :key="combo.id">
+    <div id="combo" class="page">
+        <div class="container" v-for="combo in allCombos" :key="combo.id">
             <div class="imgs">
                 <img :src="combo.img1">
                 <img :src="combo.img2">
             </div>
-            <h3>{{ combo.name }}</h3>
-            <h4>{{ combo.price }}</h4>
+            <div class="text">
+                <div>
+                    <h3>{{ combo.name }}</h3>
+                    <h4>{{ combo.price }} lei</h4>
+                </div>
+                <button class="green" @click="addToBasket(combo.id, combo.name, combo.price)">Adauga in cos</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Store from '../store/index.js'
     import { mapGetters } from 'vuex';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: "Combo",
-        computed:  mapGetters(
-            [
-                'allCombos',
-                'allCrispys',
-                'allBurgers',
-                'allSalads',
-                'allDrinks'
-            ]
-        )
+        computed: mapGetters(['allCombos']),
+        methods: {
+            ...mapMutations(['checkIfEmpty']),
+
+            addToBasket(id, name, price){
+                let newObj = {
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1
+                };
+                Store.commit('checkIfEmpty', newObj);
+            }
+        }
     }
 </script>
 
@@ -33,17 +45,29 @@
         display: flex;
         flex-direction: column;
     }
-    #container{
+    .container{
+        text-align: center;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding-bottom: 10px;
     }
     .imgs{
+        justify-self: flex-start;
+        width: 15vw;
+        margin-left: 10vw;
+        margin-right: 8vw;
         display: flex;
-        flex-direction: row;
     }
     .imgs img{
         width: 10vw;
         border-radius: 40px;
+    }
+
+    .text{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: auto;
+        height: 100%;
+        text-align: start;
     }
 </style>

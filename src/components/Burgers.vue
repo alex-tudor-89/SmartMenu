@@ -1,10 +1,14 @@
 <template>
-    <div id="burgers">
-        <div id="container" v-for="burger in allBurgers" :key="burger.id">
+    <div id="burgers" class="page">
+        <div class="container" v-for="burger in allBurgers" :key="burger.id">
             <img :src="burger.img">
-            <h3>{{ burger.name }}</h3>
-            <h4>{{ burger.price }}</h4>
-            <button :id="burger.id" @click="addToBasket(burger.id)">Buy</button>
+            <div class="text">
+                <div>
+                    <h3>{{ burger.name }}</h3>
+                    <h4>{{ burger.price }} lei</h4>
+                </div>
+                <button class="green" @click="addToBasket(burger.id, burger.name, burger.price)">Adauga in cos</button>
+            </div>
         </div>
     </div>
 </template>
@@ -18,19 +22,16 @@
         name: "Burgers",
         computed: mapGetters(['allBurgers']),
         methods: {
-            ...mapMutations(['add']),
+            ...mapMutations(['checkIfEmpty']),
 
-            addToBasket(id){
-                for (let i = 0; i < this.allBurgers.length; i++) {
-                    if (this.allBurgers[i].id === id){
+            addToBasket(id, name, price){
                         let newObj = {
-                            id: this.allBurgers[i].id,
-                            name: this.allBurgers[i].name,
-                            price: this.allBurgers[i].price
+                            id: id,
+                            name: name,
+                            price: price,
+                            quantity: 1
                         };
-                        Store.commit('add', newObj);
-                    }
-                }
+                        Store.commit('checkIfEmpty', newObj);
             }
         }
     }
@@ -41,8 +42,24 @@
         display: flex;
         flex-direction: column;
     }
-    #container{
+    .container{
         text-align: center;
+        display: flex;
+        padding-bottom: 10px;
+    }
+    .container img{
+        justify-self: flex-start;
+        width: 15vw;
+        margin-left: 10vw;
+        margin-right: 5vw;
+    }
+    .text{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: auto;
+        height: 100%;
+        text-align: start;
     }
     img{
         width: 15vw;
