@@ -22,9 +22,9 @@
         <h3>Bauturi</h3>
       </router-link>
     </div>
-    <div id="detalii">
+    <transition id="detalii" name="router-animation" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
       <router-view></router-view>
-    </div>
+    </transition>
     <div id="checkout">
       <CosDeCumparaturi/>
     </div>
@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import CosDeCumparaturi from "../components/CosDeCumparaturi";
+  import CosDeCumparaturi from "../components/CosDeCumparaturi";
 
-export default {
+  export default {
   name: 'meniu',
-    components: {CosDeCumparaturi}
-}
+  components: {CosDeCumparaturi}
+  }
 </script>
 
 <style scoped>
@@ -47,14 +47,14 @@ export default {
     grid-template-rows: 1fr 3vh;
     grid-template-columns: 2fr 1fr;
     grid-template-areas:
-        "meniu meniu"
-        "detalii checkout";
+            "meniu meniu"
+            "detalii checkout";
   }
   #meniu{
     grid-area: meniu;
     display: flex;
     justify-content: space-around;
-      margin-bottom: 5vh;
+    margin-bottom: 5vh;
   }
   #detalii{
     grid-area: detalii;
@@ -66,6 +66,9 @@ export default {
     height: 17vh;
     border-radius: 100%;
   }
+  .menuImg:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
   h3{
     text-align: center;
   }
@@ -74,6 +77,10 @@ export default {
     color: #2c3e50;
     margin-left: 10px;
     margin-right: 10px;
+  }
+  a:hover{
+    transform: scale(1.15);
+    transition: 0.5s;
   }
   a.router-link-exact-active {
     color: #42b983;

@@ -1,97 +1,101 @@
 const state = {
     burgers: [
         {
-            id: 1,
+            id: 11,
             name: 'Burger Angus',
-            price: 'xx lei',
+            price: 17,
             img: require('../../assets/img/burgers/Burger Angus.jpg')
         },
         {
-            id: 2,
+            id: 12,
             name: 'Burger vegetarian',
-            price: 'yy lei',
+            price: 19,
             img: require('../../assets/img/burgers/Burger vegetarian.jpg')
         }
     ],
     crispys: [
         {
-            id: 1,
+            id: 21,
             name: 'Crispy mic',
-            price: 'xx lei',
+            price: 20,
             img: require('../../assets/img/crispy/Crispy 5 buc.jpg')
         },
         {
-            id: 2,
+            id: 22,
             name: 'Crispy mare',
-            price: 'yy lei',
+            price: 30,
             img: require('../../assets/img/crispy/Crispy 8 buc.jpg')
         }
     ],
     salads: [
         {
-            id: 1,
+            id: 31,
             name: 'Salata greceasca',
-            price: 'xx lei',
+            price: 15,
             img: require('../../assets/img/salate/Salata greceasca.jpg')
         },
         {
-            id: 2,
+            id: 32,
             name: 'Salata de varza',
-            price: 'yy lei',
+            price: 15,
             img: require('../../assets/img/salate/Salata de varza.jpg')
         }
     ],
     drinks: [
         {
-            id: 1,
+            id: 41,
             name: 'Apa minerala / plata',
-            price: 'xx lei',
+            price: 4,
             img: require('../../assets/img/bauturi/Apa minerala sau Apa plata.jpg')
         },
         {
-            id: 2,
+            id: 42,
             name: 'Suc - gama pepsi',
-            price: 'yy lei',
+            price: 5,
             img: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
     combos: [
         {
-            id: 1,
+            id: 51,
             name: 'Crispy + Suc',
-            price: 'xx lei',
+            price: 22.5,
             img1: require('../../assets/img/crispy/Crispy 5 buc.jpg'),
             img2: require('../../assets/img/bauturi/Gama pepsi.jpg')
         },
         {
-            id: 2,
+            id: 52,
             name: 'Crispy + Apa',
-            price: 'yy lei',
+            price: 21.5,
             img1: require('../../assets/img/crispy/Crispy 5 buc.jpg'),
             img2: require('../../assets/img/bauturi/Apa minerala sau Apa plata.jpg')
         },
         {
-            id: 3,
+            id: 53,
             name: 'Crispy + salata la alegere',
-            price: 'xx lei',
+            price: 31.5,
             img1: require('../../assets/img/crispy/Crispy 5 buc.jpg'),
             img2: require('../../assets/img/salate/Salata de varza.jpg')
         },
         {
-            id: 4,
+            id: 54,
             name: 'Burger la alegere + Apa',
-            price: 'yy lei',
+            price: 19,
             img1: require('../../assets/img/burgers/Burger Angus.jpg'),
             img2: require('../../assets/img/bauturi/Apa minerala sau Apa plata.jpg')
         },
         {
-            id: 5,
+            id: 55,
             name: 'Burger la alegere + Suc',
+            price: 20,
             img1: require('../../assets/img/burgers/Burger Angus.jpg'),
             img2: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
-    cumparaturi: []
+    price: [],
+    priceIndex: 0,
+    cumparaturi: [],
+    cumparaturiLaCasa: []
 };
 
 const getters = {
@@ -100,14 +104,56 @@ const getters = {
     allSalads: (state) => state.salads,
     allDrinks: (state) => state.drinks,
     allCombos: (state) => state.combos,
-    shopping: (state) => state.cumparaturi
+    shopping: (state) => state.cumparaturi,
+    shoppingToPay: (state) => state.cumparaturiLaCasa,
+    price: (state) => state.price,
+    priceIndex: (state) => state.priceIndex
 };
 
 const actions = {};
 
 const mutations = {
     add(state, data){
-        state.cumparaturi = data;
+        state.cumparaturi.push(data);
+        mutations.calcPrice()
+    },
+    checkIfEmpty(state, data){
+        if(state.cumparaturi.length == 0){
+            mutations.add(state, data);
+        } else {
+            mutations.incrementOrAdd(state, data);
+        }
+    },
+    incrementOrAdd(state, data) {
+        let foundElement = false;
+        for (let i = 0; i < state.cumparaturi.length; i++) {
+            if (state.cumparaturi[i].id == data.id) {
+                foundElement = true;
+                state.cumparaturi[i].quantity += 1;
+                mutations.calcPrice();
+                break;
+            }
+        }
+        if(foundElement == false){
+          mutations.add(state, data)
+        }
+    },
+    clearArray(state){
+        state.cumparaturi = [];
+        state.priceIndex++
+        // state.price = [];
+    },
+    calcPrice(){
+        // state.price = [];
+        if(state.price.length == state.priceIndex){
+            state.price.push(0)
+        }
+
+        let pretTemp = 0;
+        for (let i = 0; i < state.cumparaturi.length; i++) {
+            pretTemp += state.cumparaturi[i].price * state.cumparaturi[i].quantity
+        }
+        state.price[state.priceIndex] = pretTemp
     }
 };
 
