@@ -19,7 +19,10 @@
                 </table>
             </div>
         </div>
-        <h2 id="price" >Pret: {{ price[0] }} lei</h2>
+        <div class="text">
+            <span>Nr de ordine: <b>{{nrDeOrdine[nrDeOrdine.length - 1]}}</b></span>
+            <span id="price" >Pret: <b>{{ price }}</b> lei</span>
+        </div>
         <div id="buttons">
             <button class="red" @click="clearShoppingArray">ANULEAZA</button>
             <button class="green" @click="prepareCart">Cumpara</button>
@@ -32,7 +35,7 @@
     import { mapGetters } from 'vuex'
     export default {
         name: "CosDeCumparaturi",
-        computed: mapGetters(['shopping', 'price', 'shoppingToPay', 'priceIndex']),
+        computed: mapGetters(['shopping', 'price', 'shoppingToPay', 'nrDeOrdine']),
         methods: {
             clearShoppingArray() {
                 Store.commit('clearArray');
@@ -65,8 +68,14 @@
                 }
             },
             prepareCart(){
-                this.shoppingToPay.push(this.shopping);
+                let data = {
+                    cart: this.shopping,
+                    price: this.price,
+                    nrOrd: this.nrDeOrdine[this.nrDeOrdine.length - 1]
+                };
+                this.shoppingToPay.push(data);
                 this.clearShoppingArray();
+                this.nrDeOrdine.push(this.nrDeOrdine.length + 1)
             }
         }
     }
@@ -113,5 +122,10 @@
     }
     tr:nth-child(even) {
         background-color: #eee;
+    }
+    .text{
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-evenly;
     }
 </style>

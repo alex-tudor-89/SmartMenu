@@ -92,10 +92,11 @@ const state = {
             img2: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
-    price: [],
-    priceIndex: 0,
+    price: 0,
     cumparaturi: [],
-    cumparaturiLaCasa: []
+    cumparaturiLaCasa: [],
+    nrDeOrdine: [1],
+    checkoutList: []
 };
 
 const getters = {
@@ -107,7 +108,8 @@ const getters = {
     shopping: (state) => state.cumparaturi,
     shoppingToPay: (state) => state.cumparaturiLaCasa,
     price: (state) => state.price,
-    priceIndex: (state) => state.priceIndex
+    nrDeOrdine: (state) => state.nrDeOrdine,
+    checkoutList: (state) => state.checkoutList
 };
 
 const actions = {};
@@ -140,20 +142,14 @@ const mutations = {
     },
     clearArray(state){
         state.cumparaturi = [];
-        state.priceIndex++
-        // state.price = [];
+        state.price = 0;
+
     },
     calcPrice(){
-        // state.price = [];
-        if(state.price.length == state.priceIndex){
-            state.price.push(0)
-        }
-
-        let pretTemp = 0;
+        state.price = 0;
         for (let i = 0; i < state.cumparaturi.length; i++) {
-            pretTemp += state.cumparaturi[i].price * state.cumparaturi[i].quantity
+            state.price += state.cumparaturi[i].price * state.cumparaturi[i].quantity;
         }
-        state.price[state.priceIndex] = pretTemp
     }
 };
 

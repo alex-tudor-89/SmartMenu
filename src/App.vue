@@ -33,6 +33,7 @@
         padding: 12px 7px;
         border-radius: 5px;
         border: none;
+        min-width: 100px;
 
     }
     .green{
