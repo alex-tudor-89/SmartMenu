@@ -68,14 +68,16 @@
                 }
             },
             prepareCart(){
-                let data = {
-                    cart: this.shopping,
-                    price: this.price,
-                    nrOrd: this.nrDeOrdine[this.nrDeOrdine.length - 1]
-                };
-                this.shoppingToPay.push(data);
-                this.clearShoppingArray();
-                this.nrDeOrdine.push(this.nrDeOrdine.length + 1)
+                if(this.shopping.length !== 0) {
+                    let data = {
+                        cart: this.shopping,
+                        price: this.price,
+                        nrOrd: this.nrDeOrdine[this.nrDeOrdine.length - 1]
+                    };
+                    this.shoppingToPay.push(data);
+                    this.nrDeOrdine.push(this.nrDeOrdine.length + 1)
+                    this.clearShoppingArray();
+                }
             }
         }
     }
@@ -83,6 +85,7 @@
 
 <style scoped>
     #cos{
+        background: #fff;
         text-align: center;
         border: 2px solid #42b983;
         border-radius: 45px;

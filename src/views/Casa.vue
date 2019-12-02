@@ -1,28 +1,27 @@
 <template>
   <div class="casa">
-    <div class="order" v-for="order in shoppingToPay" :key="order.index">
-      <div class="content">
-        <h3>Comanda nr: {{ order.nrOrd }}</h3>
-        <table>
-             <tr>
-               <th>Produs</th>
-               <th>Pret/buc</th>
-               <th>Cantitate</th>
-             </tr>
-             <tr v-for="item in order.cart" :key="item.id">
-               <td>{{ item.name }}</td>
-               <td>{{ item.price }} lei</td>
-               <td>{{item.quantity}} buc </td>
-             </tr>
-        </table>
-      </div>
-      <div class="buttons">
-        <h4>Pret total: {{ order.price }} lei</h4>
-        <button class="red" @click="remove(order.nrOrd)">Anuleaza</button>
-        <button class="green" @click="prepareOrder(order.nrOrd)">Platit</button>
-      </div>
+      <div class="order" v-for="order in shoppingToPay" :key="order.index">
+          <div class="content">
+            <h3>Comanda nr: {{ order.nrOrd }}</h3>
+            <table>
+                 <tr>
+                   <th>Produs</th>
+                   <th>Pret/buc</th>
+                   <th>Cantitate</th>
+                 </tr>
+                 <tr v-for="item in order.cart" :key="item.id">
+                   <td>{{ item.name }}</td>
+                   <td>{{ item.price }} lei</td>
+                   <td>{{item.quantity}} buc </td>
+                 </tr>
+            </table>
+          </div>
+          <div class="buttons">
+            <h4>Pret total: {{ order.price }} lei</h4>
+            <button class="red" @click="remove(order.nrOrd)">Anuleaza</button>
+            <button class="green" @click="prepareOrder(order.nrOrd)">Platit</button>
+          </div>
     </div>
-
   </div>
 </template>
 
@@ -60,6 +59,7 @@
     justify-content: center;
   }
   .order{
+      background: #fff;
     width: 250px;
     margin: 20px;
     display: flex;
@@ -75,11 +75,9 @@
   .buttons{
     align-self: center;
   }
-  table{
-  }
   th, td{
     padding: 5px;
-    text-align: left;
+    /*text-align: left;*/
   }
   th{
     background-color: #42b983;

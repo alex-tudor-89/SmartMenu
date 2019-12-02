@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <div class="dropdown">
-          <i class="fa fa-th-large fa-2x menuIcon"></i>
+          <i class="menu fa fa-th-large fa-2x menuIcon"></i>
           <div id="nav">
               <div><router-link to="/">Meniu</router-link></div>
               <div><router-link to="/casa">Casa</router-link></div>
@@ -28,6 +28,9 @@
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
     }
+    .menu:hover{
+        cursor: pointer;
+    }
     .green, .red{
         color: white;
         padding: 12px 7px;
@@ -41,12 +44,14 @@
     }
     .green:hover{
         background: #2c3e50;
+        cursor: pointer;
     }
     .red{
         background: crimson;
     }
     .red:hover{
         background: #2c3e50;
+        cursor: pointer;
     }
     .red-small{
         background: crimson;
