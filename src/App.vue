@@ -3,16 +3,48 @@
       <div class="dropdown">
           <i class="menu fa fa-th-large fa-2x menuIcon"></i>
           <div id="nav">
-              <div><router-link to="/">Meniu</router-link></div>
-              <div><router-link to="/casa">Casa</router-link></div>
-              <div><router-link to="/checkout">Checkout</router-link></div>
+              <div class="menuItem">
+                <router-link to="/">Meniu</router-link>
+              </div>
+              <div class="menuItem">
+                <router-link to="/casa">Casa</router-link>
+                <div class="counter" v-show="showOrNot(this.shoppingToPay)">{{ shoppingToPay.length }}</div>
+              </div>
+            <div class="menuItem">
+              <router-link to="/checkout" >Checkout</router-link>
+              <div class="counter" v-show="showOrNot(this.checkoutList)">{{ checkoutList.length }}</div>
+            </div>
           </div>
       </div>
+      <div class="counterTotal" v-show="showLength()">{{ allLength }}</div>
     <router-view/>
   </div>
 </template>
 
+<script>
+  import { mapGetters } from 'vuex'
 
+  export default {
+    computed: mapGetters(['shoppingToPay', 'checkoutList', 'allLength']),
+    methods: {
+      showOrNot(array){
+        if(array.length == 0){
+          return false;
+        } else {
+          return true;
+        }
+      },
+      showLength(){
+        if(this.allLength == 0){
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+
+</script>
 
 <style>
 
@@ -27,6 +59,9 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
+    }
+    .menu{
+      position: relative;
     }
     .menu:hover{
         cursor: pointer;
@@ -71,8 +106,11 @@
         background: lightgray;
     }
     #nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
         padding: 15px;
-        width: 100px;
+        width: 120px;
         background: white;
         border: 2px solid #42b983;
         border-radius: 25px;
@@ -80,8 +118,12 @@
         z-index: 1;
         position: absolute;
     }
+    .menuItem{
+      height: 30px;
+    }
     #nav div{
         margin-bottom: 10px;
+        display: flex;
     }
     #nav a {
         font-weight: bold;
@@ -101,4 +143,28 @@
         color: #2c3e50;
 
     }
+    .counter{
+      border: 1px solid red;
+      border-radius: 100%;
+      width: 25px;
+      height: 25px;
+      background-color: red;
+      color: #fff;
+      font-weight: bolder;
+      margin-left: 2vh;
+      justify-content: center;
+      align-items: center;
+    }
+  .counterTotal{
+    text-align: center;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background: red;
+    font-weight: bolder;
+    color: #fff;
+    position: relative;
+    top: -15px;
+    left: 15px;
+  }
 </style>

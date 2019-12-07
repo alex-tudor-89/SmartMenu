@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import Store from '../store/index.js'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -35,7 +36,8 @@
       remove(nr){
         for (let i = 0; i < this.shoppingToPay.length; i++) {
           if(nr == this.shoppingToPay[i].nrOrd){
-            this.shoppingToPay.splice(i, 1)
+            this.shoppingToPay.splice(i, 1);
+            Store.commit('addToLength');
           }
         }
       },
@@ -43,6 +45,7 @@
         for (let i = 0; i < this.shoppingToPay.length; i++) {
           if(nr == this.shoppingToPay[i].nrOrd){
             this.checkoutList.push(this.shoppingToPay[i]);
+            Store.commit('addToLength');
             this.remove(nr)
 
           }

@@ -96,7 +96,8 @@ const state = {
     cumparaturi: [],
     cumparaturiLaCasa: [],
     nrDeOrdine: [1],
-    checkoutList: []
+    checkoutList: [],
+    allLength: 0
 };
 
 const getters = {
@@ -109,7 +110,8 @@ const getters = {
     shoppingToPay: (state) => state.cumparaturiLaCasa,
     price: (state) => state.price,
     nrDeOrdine: (state) => state.nrDeOrdine,
-    checkoutList: (state) => state.checkoutList
+    checkoutList: (state) => state.checkoutList,
+    allLength: (state) => state.allLength
 };
 
 const actions = {};
@@ -150,6 +152,9 @@ const mutations = {
         for (let i = 0; i < state.cumparaturi.length; i++) {
             state.price += state.cumparaturi[i].price * state.cumparaturi[i].quantity;
         }
+    },
+    addToLength(){
+        state.allLength = state.cumparaturiLaCasa.length + state.checkoutList.length
     }
 };
 

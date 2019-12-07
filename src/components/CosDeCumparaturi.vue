@@ -1,5 +1,5 @@
 <template>
-    <div id="cos">
+    <div id="cos" v-show="showBtn()">
         <div id="content">
             <h1>Cos de cumparaturi</h1>
             <div class="data">
@@ -33,10 +33,16 @@
 <script>
     import Store from '../store/index.js'
     import { mapGetters } from 'vuex'
+
     export default {
         name: "CosDeCumparaturi",
-        computed: mapGetters(['shopping', 'price', 'shoppingToPay', 'nrDeOrdine']),
+        computed: mapGetters(['shopping', 'price', 'shoppingToPay', 'nrDeOrdine', 'counterCasa']),
         methods: {
+            showBtn(){
+                if(this.shopping.length == 0){
+                    return false
+                } else {return true}
+            },
             clearShoppingArray() {
                 Store.commit('clearArray');
             },
@@ -75,7 +81,8 @@
                         nrOrd: this.nrDeOrdine[this.nrDeOrdine.length - 1]
                     };
                     this.shoppingToPay.push(data);
-                    this.nrDeOrdine.push(this.nrDeOrdine.length + 1)
+                    Store.commit('addToLength');
+                    this.nrDeOrdine.push(this.nrDeOrdine.length + 1);
                     this.clearShoppingArray();
                 }
             }
