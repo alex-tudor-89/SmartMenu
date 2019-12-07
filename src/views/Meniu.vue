@@ -22,45 +22,83 @@
         <h3>Bauturi</h3>
       </router-link>
     </div>
-    <transition id="detalii" name="router-animation" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-      <router-view></router-view>
-    </transition>
-    <div id="checkout">
-      <CosDeCumparaturi/>
+
+    <router-view></router-view>
+
+    <div id="checkout" v-show="showCart">
+      <div class="checkoutContent">
+        <CosDeCumparaturi />
+        <button id="close" @click="modifyCartFalse">&#10006;</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import CosDeCumparaturi from "../components/CosDeCumparaturi";
+  import Store from '../store/index.js'
+  import {mapGetters} from 'vuex';
 
   export default {
   name: 'meniu',
-  components: {CosDeCumparaturi}
+  components: {CosDeCumparaturi},
+    computed: mapGetters(['showCart']),
+    methods:{
+      modifyCartFalse(){
+        Store.commit('hideCartContent')
+      }
+    }
   }
 </script>
 
 <style scoped>
   #menuView{
-    display: grid;
     margin-top: 5vh;
-    grid-template-rows: 1fr 3vh;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-            "meniu meniu"
-            "detalii checkout";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   #meniu{
-    grid-area: meniu;
     display: flex;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: space-evenly;
     margin-bottom: 5vh;
   }
-  #detalii{
-    grid-area: detalii;
-  }
   #checkout{
-    grid-area: checkout;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .checkoutContent{
+    width: 25vw;
+    border-radius: 45px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: -30vh;
+    margin-left: -12.5vw;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+  #close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 3px solid #2c3e50;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: none;
+    color: #2c3e50;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  #close:hover{
+    color: red;
+    cursor: pointer;
   }
   .menuImg{
     height: 17vh;

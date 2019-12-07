@@ -97,7 +97,8 @@ const state = {
     cumparaturiLaCasa: [],
     nrDeOrdine: [1],
     checkoutList: [],
-    allLength: 0
+    allLength: 0,
+    showCart: false
 };
 
 const getters = {
@@ -111,7 +112,8 @@ const getters = {
     price: (state) => state.price,
     nrDeOrdine: (state) => state.nrDeOrdine,
     checkoutList: (state) => state.checkoutList,
-    allLength: (state) => state.allLength
+    allLength: (state) => state.allLength,
+    showCart: (state) => state.showCart
 };
 
 const actions = {};
@@ -145,6 +147,7 @@ const mutations = {
     clearArray(state){
         state.cumparaturi = [];
         state.price = 0;
+        mutations.hideCartContent();
 
     },
     calcPrice(){
@@ -155,6 +158,12 @@ const mutations = {
     },
     addToLength(){
         state.allLength = state.cumparaturiLaCasa.length + state.checkoutList.length
+    },
+    showCartContent() {
+        state.showCart = true;
+    },
+    hideCartContent(){
+        state.showCart = false;
     }
 };
 

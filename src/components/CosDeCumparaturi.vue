@@ -1,5 +1,5 @@
 <template>
-    <div id="cos" v-show="showBtn()">
+    <div id="cos">
         <div id="content">
             <h1>Cos de cumparaturi</h1>
             <div class="data">
