@@ -1,7 +1,6 @@
 <template>
     <div id="cos">
         <div id="content">
-            <h1>Cos de cumparaturi</h1>
             <div class="data">
                 <table>
                     <tr>
@@ -92,50 +91,49 @@
 
 <style scoped>
     #cos{
-        background: #fff;
-        text-align: center;
-        border: 2px solid #42b983;
-        border-radius: 45px;
-        height: 60vh;
-        width: 25vw;
         display: flex;
         flex-direction: column;
-        margin-right: 5vw;
         justify-content: space-around;
+        height: 50vh;
+        text-align: center;
     }
     #content{
         height: 85%;
     }
-    #price{
+    .data{
+        height: 100%;
+        overflow-y: auto;
+    }
+    .data table{
+        width: 100%;
+        padding: 0 25px;
+        text-align: start;
+    }
+    .data tr{
+        height: 40px;
+    }
+    .data th{
+        background-color: #42b983;
+        position: sticky;
+        top: 0;
+    }
+    .data tr:nth-child(even){
+        background-color: #eeeeee;
+    }
+    .text{
         height: 5%;
+        display: flex;
+        justify-content: center;
+    }
+    .text span{
+        margin: 0 15px;
     }
     #buttons{
         height: 10%;
+        display: flex;
+        justify-content: center;
     }
     #buttons button{
-        margin: 5px;
-    }
-    .data{
-        height: 80%;
-        overflow-y: auto;
-
-    }
-    table{
-        width: 100%;
-    }
-    th, td{
-        padding: 15px;
-        text-align: left;
-    }
-    th{
-        background-color: #42b983;
-    }
-    tr:nth-child(even) {
-        background-color: #eee;
-    }
-    .text{
-        font-size: 1.2em;
-        display: flex;
-        justify-content: space-evenly;
+        margin: 0 15px;
     }
 </style>

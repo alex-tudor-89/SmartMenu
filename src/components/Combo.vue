@@ -43,31 +43,36 @@
 <style scoped>
     #combo{
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    @media (max-width: 600px){
+        #combo img{
+            display: none;
+        }
+        #combo{
+            justify-content: flex-start;
+        }
+        .text{
+            width: 80vw;
+        }
     }
     .container{
-        text-align: center;
+        margin: 2vh 5vw;
         display: flex;
-        padding-bottom: 10px;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .text{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     .imgs{
-        justify-self: flex-start;
-        width: 15vw;
-        margin-left: 10vw;
-        margin-right: 8vw;
         display: flex;
     }
     .imgs img{
-        width: 10vw;
-        border-radius: 40px;
-    }
-
-    .text{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        width: auto;
-        height: 100%;
-        text-align: start;
+        width: 20vh;
+        border-radius: 20px;
     }
 </style>

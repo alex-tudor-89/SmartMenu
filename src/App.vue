@@ -2,21 +2,21 @@
   <div id="app">
       <div class="mainNav">
           <div class="dropdown">
-            <div >
-              <i class="menu fa fa-th-large fa-2x menuIcon"></i>
-              <div id="nav">
-                  <div class="menuItem">
-                    <router-link to="/">Meniu</router-link>
-                  </div>
-                  <div class="menuItem">
-                    <router-link to="/casa">Casa</router-link>
-                    <div class="counter" v-show="showOrNot(this.shoppingToPay)">{{ shoppingToPay.length }}</div>
-                  </div>
-                <div class="menuItem">
-                  <router-link to="/checkout" >Checkout</router-link>
-                  <div class="counter" v-show="showOrNot(this.checkoutList)">{{ checkoutList.length }}</div>
+            <div>
+                <i class="menu fa fa-th-large fa-2x menuIcon"></i>
+                <div id="nav">
+                    <div class="menuItem">
+                      <router-link to="/">Meniu</router-link>
+                    </div>
+                      <div class="menuItem">
+                        <router-link to="/casa">Casa</router-link>
+                        <div class="counter" v-show="showOrNot(this.shoppingToPay)">{{ shoppingToPay.length }}</div>
+                      </div>
+                    <div class="menuItem">
+                      <router-link to="/checkout" >Checkout</router-link>
+                      <div class="counter" v-show="showOrNot(this.checkoutList)">{{ checkoutList.length }}</div>
                 </div>
-              </div>
+            </div>
           </div>
             <div class="counterTotal" v-show="showLength()">{{ allLength }}</div>
           </div>
@@ -78,9 +78,14 @@
 
     @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
     body{
-        background: cornsilk;
+        background: #BEE6CE;
         margin-left: 10vw;
         margin-right: 10vw;
+    }
+    @media (max-width: 1000px){
+        body{
+            margin: 5px 20px;
+        }
     }
     #app {
         font-family: 'Roboto', sans-serif;
@@ -92,6 +97,8 @@
         height: 50px;
         display: flex;
         justify-content: space-between;
+        position: sticky;
+        top: 0;
     }
     .menu{
       position: relative;
@@ -234,5 +241,9 @@
         position: relative;
         top: 20px;
         left: 20px;
+    }
+    .dropdown button {
+        background: none;
+        border: none;
     }
 </style>

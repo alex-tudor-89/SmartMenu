@@ -40,29 +40,25 @@
 <style scoped>
     #bauturi{
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    @media (max-width: 600px){
+        #bauturi img{
+            width: 60vw;
+            height: auto;
+        }
     }
     .container{
-        text-align: center;
-        display: flex;
-        padding-bottom: 10px;
-    }
-    .container img{
-        justify-self: flex-start;
-        width: 15vw;
-        margin-left: 10vw;
-        margin-right: 5vw;
+        margin: 0 5vw;
     }
     .text{
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        width: auto;
-        height: 100%;
-        text-align: start;
+        align-items: center;
+        justify-content: space-between;
     }
     img{
-        width: 15vw;
-        border-radius: 40px;
+        height: 40vh;
+        border-radius: 20px;
     }
 </style>

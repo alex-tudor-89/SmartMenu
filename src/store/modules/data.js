@@ -13,21 +13,21 @@ const state = {
             img: require('../../assets/img/burgers/Burger vegetarian.jpg')
         }
     ],
-    crispys: [
+    crispy: [
         {
             id: 21,
-            name: 'Crispy mic',
+            name: 'Crispy 5 buc',
             price: 20,
             img: require('../../assets/img/crispy/Crispy 5 buc.jpg')
         },
         {
             id: 22,
-            name: 'Crispy mare',
+            name: 'Crispy 8 buc',
             price: 30,
             img: require('../../assets/img/crispy/Crispy 8 buc.jpg')
         }
     ],
-    salads: [
+    salate: [
         {
             id: 31,
             name: 'Salata greceasca',
@@ -41,7 +41,7 @@ const state = {
             img: require('../../assets/img/salate/Salata de varza.jpg')
         }
     ],
-    drinks: [
+    bauturi: [
         {
             id: 41,
             name: 'Apa minerala / plata',
@@ -55,7 +55,7 @@ const state = {
             img: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
-    combos: [
+    combo: [
         {
             id: 51,
             name: 'Crispy + Suc',
@@ -92,28 +92,39 @@ const state = {
             img2: require('../../assets/img/bauturi/Gama pepsi.jpg')
         }
     ],
+    categorii1: [],
+    categorii2: [],
     price: 0,
     cumparaturi: [],
     cumparaturiLaCasa: [],
     nrDeOrdine: [1],
     checkoutList: [],
     allLength: 0,
-    showCart: false
+    showCart: false,
+    logIn: true,
+    admin: {
+        user: 'admin',
+        password: '1234'
+    }
 };
 
 const getters = {
     allBurgers: (state) => state.burgers,
-    allCrispys: (state) => state.crispys,
-    allSalads: (state) => state.salads,
-    allDrinks: (state) => state.drinks,
-    allCombos: (state) => state.combos,
+    allCrispys: (state) => state.crispy,
+    allSalads: (state) => state.salate,
+    allDrinks: (state) => state.bauturi,
+    allCombos: (state) => state.combo,
     shopping: (state) => state.cumparaturi,
     shoppingToPay: (state) => state.cumparaturiLaCasa,
     price: (state) => state.price,
     nrDeOrdine: (state) => state.nrDeOrdine,
     checkoutList: (state) => state.checkoutList,
     allLength: (state) => state.allLength,
-    showCart: (state) => state.showCart
+    showCart: (state) => state.showCart,
+    logIn: (state) => state.logIn,
+    admin: (state) => state.admin,
+    categorii1: (state) => state.categorii1,
+    categorii2: (state) => state.categorii2
 };
 
 const actions = {};
@@ -164,7 +175,73 @@ const mutations = {
     },
     hideCartContent(){
         state.showCart = false;
+    },
+    logInFalse(){
+        state.logIn = false
+    },
+    logInTrue(){
+        state.logIn = true
+    },
+    addToCat(state, payload){
+        let produs = payload.produs;
+
+        switch (payload.categorie){
+            case 'burgers':
+                produs.id = state.burgers[state.burgers.length - 1].id + 1;
+                produs.img = require('../../assets/img/menu/burgers.jpg');
+                state.burgers.push(produs);
+                break;
+            case 'crispy':
+                produs.id = state.crispy[state.crispy.length - 1].id + 1;
+                produs.img = require('../../assets/img/menu/crispy.jpg');
+                state.crispy.push(produs);
+                break;
+            case 'salate':
+                produs.id = state.salate[state.salate.length - 1].id + 1;
+                produs.img = require('../../assets/img/menu/salate.jpg');
+                state.salate.push(produs);
+                break;
+            case 'bauturi':
+                produs.id = state.bauturi[state.bauturi.length - 1].id + 1;
+                produs.img = require('../../assets/img/menu/bauturi.jpg');
+                state.bauturi.push(produs);
+                break;
+            case 'combo':
+                produs.id = state.combo[state.combo.length - 1].id + 1;
+                // produs.img = require('../../assets/img/menu/bauturi.jpg');
+                state.combo.push(produs);
+                break;
+            default: break;
+        }
+    },
+    changeCat(state, payload){
+        if(payload.cat == 1){
+            switch (payload.name) {
+                case 'burgers': state.categorii1 = state.burgers;
+                    break;
+                case 'crispy': state.categorii1 = state.crispy;
+                    break;
+                case 'salate': state.categorii1 = state.salate;
+                    break;
+                case 'bauturi': state.categorii1 = state.bauturi;
+                    break;
+                default: break;
+            }
+        } else if(payload.cat == 2) {
+            switch (payload.name) {
+                case 'burgers': state.categorii2 = state.burgers;
+                    break;
+                case 'crispy': state.categorii2 = state.crispy;
+                    break;
+                case 'salate': state.categorii2 = state.salate;
+                    break;
+                case 'bauturi': state.categorii2 = state.bauturi;
+                    break;
+                default: break;
+            }
+        }
     }
+
 };
 
 export default {

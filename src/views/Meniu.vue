@@ -27,8 +27,13 @@
 
     <div id="checkout" v-show="showCart">
       <div class="checkoutContent">
-        <CosDeCumparaturi />
-        <button id="close" @click="modifyCartFalse">&#10006;</button>
+        <div class="header">
+          <h1>Cos de cumparaturi</h1>
+          <button id="close" @click="modifyCartFalse">&#10006;</button>
+        </div>
+        <div class="cos">
+          <CosDeCumparaturi />
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +68,31 @@
     width: 100%;
     justify-content: space-evenly;
     margin-bottom: 5vh;
+    padding-bottom: 2vh;
+    border-bottom: 3px solid #42b983;
+  }
+
+  @media (max-width: 1000px) {
+    #meniu img{
+      height: 10vh;
+    }
+  }
+  @media (max-width: 600px){
+    #meniu img{
+      display: none;
+    }
+    .checkoutContent{
+      background: black;
+
+    }
+  }
+  @media (max-width: 400px){
+    #meniu{
+      flex-direction: column;
+    }
+    h3{
+      margin: 2px;
+    }
   }
   #checkout{
     position: absolute;
@@ -73,28 +103,33 @@
     background: rgba(0, 0, 0, 0.5);
   }
   .checkoutContent{
-    width: 25vw;
-    border-radius: 45px;
+    background: white;
+    width: 550px;
+    border-radius: 24px;
     position: relative;
     top: 50%;
     left: 50%;
     margin-top: -30vh;
-    margin-left: -12.5vw;
+    margin-left: -275px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px;
+    color: #2c3e50;
+    border-radius: 45px;
+    margin-bottom: 15px;
+  }
+  .header h1{
+    margin: 0;
+  }
   #close{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: 3px solid #2c3e50;
+    border-radius: 100%;
+    border: none;
     width: 25px;
     height: 25px;
-    border-radius: 100%;
-    background: none;
-    color: #2c3e50;
-    padding: 0;
-    display: flex;
-    justify-content: center;
   }
   #close:hover{
     color: red;
@@ -122,5 +157,8 @@
   }
   a.router-link-exact-active {
     color: #42b983;
+  }
+  a.router-link-exact-active .menuImg{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 </style>

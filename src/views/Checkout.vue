@@ -1,5 +1,8 @@
 <template>
   <div id="checkout">
+      <div class="logIn">
+          <router-link to="/admin" style="position: fixed; left: 50px;">Admin</router-link>
+      </div>
       <div class="order" v-for="order in checkoutList" :key="order.index">
           <div class="content">
               <h3>Comanda nr: {{ order.nrOrd }}</h3>
@@ -75,5 +78,10 @@
     }
     tr:nth-child(even) {
         background-color: #eee;
+    }
+    .logIn{
+        position: fixed;
+        top: 20px;
+        left: 250px;
     }
 </style>
